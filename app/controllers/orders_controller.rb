@@ -1,14 +1,17 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :check_user, only: [:edit, :update, :destroy, :show]
+  before_action :check_user, only: [:edit, :update, :destroy, :show, :index]
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.all()
   end
 
+  def purchases
+    @orders = Order.where(user_id: current_user.id)
+  end
   # GET /orders/1
   # GET /orders/1.json
   def show
@@ -17,7 +20,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @site = Site.find(params[:site_id])
   end
 
   # GET /orders/1/edit
@@ -28,9 +30,9 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @site = Site.find(params[:site_id])
-    @order.site_id=@site.id
     @order.user_id = current_user.id
+    @order.total_price = Site.find(@order.site_id).price * @order.frequency * @order.period 
+    @order.status = "not paid"
 
     respond_to do |format|
       if @order.save
@@ -62,7 +64,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to site_orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,12 +77,12 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:post_id, :period, :start_date, :address, :phone)
+      params.require(:order).permit(:site_id, :post_id, :period, :start_date, :frequency, :address, :phone)
     end
 
       def check_user
-    unless (@order.user == current_user) || (current_user.is_admin?)
-      redirect_to root_url, alert: "Sorry, this order belongs to someone else"
+    unless (current_user.is_admin?)
+      redirect_to root_url, alert: "You have no admin righs!"
     end
   end
 end

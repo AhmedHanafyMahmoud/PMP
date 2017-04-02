@@ -13,12 +13,15 @@
   <% end %>
 
  <div class="form-group">
-    <%= f.label "Post"%>
+    <%= f.label "Select your post"%><br>
     <%= f.collection_select :post_id, Post.where(user_id: current_user.id).order("created_at DESC"),:id,:name , class: "form-control" %>
   </div>
-
+ <div class="form-group">
+    <%= f.label "Select the site"%> <br>
+    <%= f.collection_select :site_id, Site.all(),:id,:name , class: "form-control" %>
+  </div>
   <div class="form-group">
-    <%= f.label :period %>
+    <%= f.label "Period (in weeks)"  %>
     <%= f.number_field :period , class: "form-control" %>
   </div>
 
@@ -26,17 +29,21 @@
     <%= f.label :start_date %>
     <%= f.date_select :start_date , class: "form-control" %>
   </div>
+  
+  <div class="form-group">
+    <%= f.label "Frequency (in hours)" %>
+    <%= f.number_field :frequency , class: "form-control" %>
+  </div>
 
   <div class="form-group">
-    <%= f.label :address %>
+    <%= f.label "Your full address"%>
     <%= f.text_field :address, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :phone %>
+    <%= f.label "Your contact phone" %>
     <%= f.text_field :phone, class: "form-control" %>
   </div>
-
  <div class="actions">
     <%= f.submit class: "btn btn-primary" %>
   </div>

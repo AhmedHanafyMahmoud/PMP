@@ -10,6 +10,7 @@
       <th>Address</th>
       <th>Number of Displays</th>
       <th>Description</th>
+       <th>Price</th>
       <% if user_signed_in? && current_user.is_admin? %>
         <th colspan="2"></th>
       <% end %>
@@ -23,6 +24,7 @@
         <td><%= site.address %></td>
         <td><%= site.displayNumber%></td>
         <td><%= site.description%></td>
+        <td><%= number_to_currency(site.price)%></td>
         <% if user_signed_in? && current_user.is_admin? %>
           <td><%= link_to 'Edit', edit_site_path(site), class: "btn btn-link" %></td>
           <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></td>

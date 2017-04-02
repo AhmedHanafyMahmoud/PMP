@@ -19,6 +19,10 @@
   <strong>Description:</strong>
   <%= @site.description %>
 </p>
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@site.price) %>
+</p>
 
 <%= link_to 'Edit', edit_site_path(@site), class: "btn btn-link" %> |
 <%= link_to 'Back', sites_path, class: "btn btn-link" %>

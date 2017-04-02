@@ -6,9 +6,12 @@ Rails.application.routes.draw do
 
   get 'pages/contact'
 
-  resources :sites do
-  	resources :orders
-  end
+  resources :sites
+  resources :orders
+  get 'purchases' => "orders#purchases"
+  get 'allposts' => "posts#posts"
+  get 'allusers' => "posts#users"
+
 
   root 'sites#index' 
 

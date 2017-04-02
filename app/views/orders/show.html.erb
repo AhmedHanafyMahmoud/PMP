@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Period:</strong>
   <%= @order.period %>
@@ -9,7 +7,10 @@
   <strong>Start date:</strong>
   <%= @order.start_date %>
 </p>
-
+<p>
+  <strong>Frequency:</strong>
+  <%= @order.frequency %>
+</p>
 <p>
   <strong>Address:</strong>
   <%= @order.address %>
@@ -19,6 +20,13 @@
   <strong>Phone:</strong>
   <%= @order.phone %>
 </p>
-
-<%= link_to 'Edit', edit_site_order_path %> |
-<%= link_to 'Back', site_orders_path  %>
+<p>
+  <strong>Total Price:</strong>
+  <%= number_to_currency(@order.total_price) %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%=  @order.status %>
+</p>
+<%= link_to 'Edit', edit_order_path %> |
+<%= link_to 'Back', orders_path  %>
