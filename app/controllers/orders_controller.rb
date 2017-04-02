@@ -32,7 +32,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.user_id = current_user.id
-    @order.total_price = Site.find(@order.site_id).price * @order.frequency * @order.period 
+    unless(@order.frequency== nil || @order.period==nil || @order.site_id== nil)
+      @order.total_price = Site.find(@order.site_id).price * @order.frequency * @order.period 
+    else
+      @order.total_price = 0
+    end
     @order.status = "unpaid"
 
     respond_to do |format|
