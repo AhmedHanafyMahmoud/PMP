@@ -5,6 +5,8 @@
 <h1>Purchases History</h1>
 <table class="table table-striped table-bordered">
   <tr>
+    <th class="center">Post</th>
+    <th class="center">Site</th>
     <th class="center">Start Date</th>
     <th class="center">Period</th>
     <th class="center">Frequency</th>
@@ -14,6 +16,8 @@
 
   <% @orders.each do |order| %>
     <tr>
+      <td><%= image_tag Post.find(order.post_id).image.url(:thumb) %></td>
+      <td><%= Site.find(order.site_id).name %></td>
       <td><%= order.start_date %></td>
       <td><%= order.period %></td>
       <td><%= order.frequency %></td>

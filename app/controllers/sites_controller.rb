@@ -11,6 +11,11 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
+    @orders= Order.where(site_id: @site.id)
+    @posts=[]
+    @orders.each do |order|
+       @posts.append(Post.find(order.post_id))
+     end  
   end
 
   # GET /sites/new

@@ -23,7 +23,19 @@
         <td><%= link_to site.name, site, class: "btn btn-link" %></td>
         <td><%= site.address %></td>
         <td><%= site.displayNumber%></td>
-        <td><%= site.description%></td>
+         <td>  <% if site.description.length > 90 %>
+                  <%= truncate(site.description, length: 90) %>
+                  <%= link_to 'Read more', '', class: "read-more-#{site.id}" %>
+                  <script>
+                    $('.read-more-<%=site.id %>').on('click', function(e) {
+                      e.preventDefault()
+                      $(this).parent().html('<%= escape_javascript site.description %>')
+                    })
+                  </script>
+                <% else %>
+                  <%= site.description %>
+                <% end %>
+       </td>
         <td><%= number_to_currency(site.price)%></td>
         <% if user_signed_in? && current_user.is_admin? %>
           <td><%= link_to 'Edit', edit_site_path(site), class: "btn btn-link" %></td>
