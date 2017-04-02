@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :check_user, only: [:edit, :update, :destroy, :show, :index]
+  before_filter :reject_locked!
 
   # GET /orders
   # GET /orders.json
@@ -32,7 +33,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user_id = current_user.id
     @order.total_price = Site.find(@order.site_id).price * @order.frequency * @order.period 
-    @order.status = "not paid"
+    @order.status = "unpaid"
 
     respond_to do |format|
       if @order.save
@@ -80,9 +81,22 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:site_id, :post_id, :period, :start_date, :frequency, :address, :phone)
     end
 
-      def check_user
-    unless (current_user.is_admin?)
-      redirect_to root_url, alert: "You have no admin righs!"
+    def check_user
+      unless (current_user.is_admin?)
+        redirect_to root_url, alert: "You have no admin righs!"
+      end
     end
-  end
+
+
+    def reject_locked!
+      if current_user && current_user.is_locked?
+        sign_out current_user
+        user_session = nil
+        current_user = nil
+        flash[:alert] = "Your account is locked."
+        flash[:notice] = nil
+        redirect_to root_url
+      end
+    end
+    helper_method :reject_locked!
 end

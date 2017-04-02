@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_filter :reject_locked!
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_admin, only: [:posts, :users]
+  
 
   # GET /posts
   # GET /posts.json
@@ -91,4 +93,18 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:name, :image)
     end
+  def reject_locked!
+    if current_user && current_user.is_locked?
+      sign_out current_user
+      user_session = nil
+      current_user = nil
+      flash[:alert] = "Your account is locked."
+      flash[:notice] = nil
+      redirect_to root_url
+    end
+  end
+  helper_method :reject_locked!
+
+
+    
 end

@@ -1,3 +1,7 @@
+<p class= "text-center">
+<%= link_to 'Create a new Order', new_order_path , class: "btn btn-primary" , data: { no_turbolink: true } %>
+</p>
+<br>
 <h1>Purchases History</h1>
 <table class="table table-striped table-bordered">
   <tr>
@@ -19,6 +23,4 @@
   <% end %>
 </table>
 
-<br>
 
-<%= link_to 'New Order', new_order_path , class: "btn btn-link" , data: { no_turbolink: true } %>

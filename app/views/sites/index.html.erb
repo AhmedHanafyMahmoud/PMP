@@ -37,7 +37,9 @@
 <br>
 
 <% if user_signed_in? && current_user.is_admin? %>
-  <%= link_to 'New Site', new_site_path, class: "btn btn-link" %>
+ <p class= "text-center">
+<%= link_to 'Create a new Site', new_site_path, class: "btn btn-primary" , data: { no_turbolink: true } %>
+</p>
 <% end %>
 
 
