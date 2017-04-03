@@ -33,7 +33,9 @@
     <p class= "text-center">
 <%= link_to 'Publish here', new_order_path , class: "btn btn-primary" , data: { no_turbolink: true } %>
 </p>
-    <br>
+   
+    <h4> Current played media: </h4>
+     <br>
     <div class="center">
       <div class="row">
         <% @posts.each do |post| %>
@@ -50,6 +52,5 @@
 </div>
 
 <% if user_signed_in? && current_user.is_admin? %>
-  <%= link_to 'Edit', edit_site_path(@site), class: "btn btn-link" %> |
-  <%= link_to 'Back', sites_path, class: "btn btn-link" %>
+  <%= link_to 'Edit', edit_site_path(@site), class: "btn btn-link" %>
 <% end %>

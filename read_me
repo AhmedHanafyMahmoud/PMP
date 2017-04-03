@@ -1,9 +1,10 @@
 I need to handle:
 	forget password
-	questionmark helper
 	Mailer functionality 
 	online payment
-	home has recent posts
-	label for total price 
-	checkbox to confirm order
+	home has recent posts!
 	status updated to cancel or expired automatically every day
+	JS tasks:
+		label for total price 
+		checkbox to confirm order
+		questionmark helper
