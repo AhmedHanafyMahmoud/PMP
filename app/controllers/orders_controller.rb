@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :check_user, only: [:edit, :update, :destroy, :show, :index]
+  before_action :check_admin, only: [:index]
+  before_action :check_status, only: [:edit, :update]
   before_filter :reject_locked!
   before_action :check_hasPosts, only: [:new]
 
@@ -86,8 +87,13 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:site_id, :post_id, :period, :start_date, :frequency, :address, :phone)
     end
 
-    def check_user
+    def check_admin
       unless (current_user.is_admin?)
+        redirect_to root_url, alert: "You have no admin righs!"
+      end
+    end    
+    def check_status
+      unless (current_user.is_admin? or @order.status=="unpaid")
         redirect_to root_url, alert: "You have no admin righs!"
       end
     end

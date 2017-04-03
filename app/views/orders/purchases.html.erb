@@ -12,6 +12,8 @@
     <th class="center">Frequency</th>
     <th class="center">Total price</th>
     <th class="center">Status</th>
+    <th class="center">Action</th>
+
   </tr>
 
   <% @orders.each do |order| %>
@@ -23,6 +25,20 @@
       <td><%= order.frequency %></td>
       <td> <%= order.total_price %></td>
       <td> <%= order.status %></td>
+      <td>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "View", order, class: "btn btn-link" %></li>
+            <% if (order.status=="unpaid") %>
+            <li><%= link_to "Edit", edit_order_path(order), class: "btn btn-link" %></li>
+            <% end %>
+            <li><%= link_to 'Destroy', order, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %></li>
+          </ul>
+        </div>
+      </td>
     </tr>
   <% end %>
 </table>

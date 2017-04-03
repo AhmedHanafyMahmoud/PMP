@@ -1,7 +1,9 @@
 I need to handle:
 	forget password
 	questionmark helper
-	allow edit and destroy orders
 	Mailer functionality 
 	online payment
 	home has recent posts
+	label for total price 
+	checkbox to confirm order
+	status updated to cancel or expired automatically every day
