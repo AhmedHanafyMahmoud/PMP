@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user, only: [:edit, :update, :destroy, :show, :index]
   before_filter :reject_locked!
+  before_action :check_hasPosts, only: [:new]
 
   # GET /orders
   # GET /orders.json
@@ -90,7 +91,11 @@ class OrdersController < ApplicationController
         redirect_to root_url, alert: "You have no admin righs!"
       end
     end
-
+    def check_hasPosts
+      if (Post.where(user_id: current_user.id).length == 0)
+        redirect_to new_post_path, alert: "You must creat a media first!"
+      end
+    end
 
     def reject_locked!
       if current_user && current_user.is_locked?

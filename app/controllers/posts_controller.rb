@@ -91,7 +91,7 @@ class PostsController < ApplicationController
   end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :image)
+      params.require(:post).permit(:name, :description, :image)
     end
   def reject_locked!
     if current_user && current_user.is_locked?

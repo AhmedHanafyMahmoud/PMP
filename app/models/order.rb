@@ -12,7 +12,12 @@ class Order < ApplicationRecord
         less_than_or_equal_to: 16,
       message: "(in weeks) can only be a whole number between 1 and 16"
   }
- 
+  # validate :expiration_date_cannot_be_in_the_past
+  # def expiration_date_cannot_be_in_the_past
+  #   unless ((:start_date.year * 365 + :start_date.month * 30 + :start_date.day ) > ((Date.today + 1).year*365+(Date.today + 1).month*30+(Date.today + 1).day))  
+  #     errors.add(:expiration_date, "can't be before 2 days from now")
+  #   end
+  # end    
 
 	  belongs_to :user
     belongs_to :post
