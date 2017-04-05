@@ -1,7 +1,20 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'https://pmp2017.herokuapp.com', port: 3000 }
+    # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            ENV['Email'],
+    password:             ENV['Email_password'],
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_caching = false
   # Code is not reloaded between requests.
   config.cache_classes = true
 
