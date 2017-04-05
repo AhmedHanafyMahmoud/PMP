@@ -10,7 +10,7 @@ Rails.application.configure do
     domain:               'pmp2017.herokuapp.com',
     user_name:            ENV['Email'],
     password:             ENV['Email_password'],
-    authentication:       'login',
+    authentication:       'plain',
     enable_starttls_auto: true  }
 
   config.action_mailer.perform_deliveries = true
