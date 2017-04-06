@@ -11,8 +11,7 @@ Rails.application.configure do
     user_name:            ENV['Email'],
     password:             ENV['Email_password'],
     authentication:       'plain',
-    openssl_verify_mode:  'none',
-    enable_starttls_auto: true  }
+    openssl_verify_mode:  'none'}
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
