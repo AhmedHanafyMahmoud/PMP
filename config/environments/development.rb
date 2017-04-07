@@ -13,6 +13,9 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  }
 
+   # openssl_verify_mode:  'none',
+   # enable_starttls_auto: true}
+
   config.action_mailer.perform_deliveries = true
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
