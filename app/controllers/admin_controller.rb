@@ -11,7 +11,7 @@ class AdminController < ApplicationController
 
   def edit_order
     @order=Order.find(params[:param1])
-    @order.status=params[:param2]
+    @order.status = params[:param2]
     @order.save
     redirect_to orders_path
   end
