@@ -7,7 +7,7 @@ Rails.application.configure do
       api_key: ENV['MAILGUN_API_KEY'],
       domain: ENV['MAILGUN_DOMAIN']
   }
-  config.action_mailer.default_url_options = { host: 'https://pmp2.herokuapp.com'}
+  config.action_mailer.default_url_options = { host: 'https://pmp2017.herokuapp.com'}
 
   # config.action_mailer.perform_deliveries = true
   # Code is not reloaded between requests.
