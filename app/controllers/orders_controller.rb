@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, data: { no_turbolink: true }, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order, data_turbolinks: "false", notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
     end
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, data: { no_turbolink: true }, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, data_turbolinks:"false", notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }

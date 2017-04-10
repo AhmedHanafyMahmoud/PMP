@@ -34,7 +34,7 @@
           <ul class="dropdown-menu" role="menu">
             
             <% if (order.status=="unpaid") %>
-            <li><%= link_to "view & pay", order, class: "btn btn-link" , data: { no_turbolink: true } %></li>
+            <li data-turbolinks="false"><%= link_to "view & pay", order, class: "btn btn-link" %></li>
             <li><%= link_to "Edit", edit_order_path(order), class: "btn btn-link" %></li>
             <% else %>
             <li><%= link_to "view", order, class: "btn btn-link" %></li>
