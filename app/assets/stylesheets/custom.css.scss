@@ -10,7 +10,13 @@
   font-weight: italic;
   }
 }
-
+.btn-group{
+  :active,
+  &.active{
+  background-color: #c52d2f;
+  color: #fff;
+}
+}
 .container-fluid{
   padding: 10px 120px !important ;
 }
