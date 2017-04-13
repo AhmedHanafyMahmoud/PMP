@@ -1,50 +1,65 @@
 <div class="container-fluid">    
-<p>
-  <strong>Period:</strong>
-  <%= @order.period %>
-</p>
+  <h2>
+    <strong>Order number:</strong>
+    <%= @order.id %>
+  </h2> 
+  <div class="row">
+    <div class="col-md-6">
+        <p>
+         <strong> Post:</strong> <%= @order.post.name %>
+        </p>  
+        <%= image_tag @order.post.image_url %>
+        <p>
+          <strong>Your address:</strong>
+          <%= @order.address %>
+        </p>
+        <p>
+          <strong>your phone:</strong>
+          <%= @order.phone %>
+        </p>
+    </div>
+    <div class="col-md-6">
+      <p>
+       <strong> Site:</strong> <%= @order.site.name %></strong> 
+      </p>  
+      <p>
+        <%= @order.site.address %>
+      </p>
+      <p>
+        Number of available displays <area shape="" coords="" href="">
+        <%= @order.site.displayNumber %>
+      </p>
+      <p>
+        <strong>Show time from: </strong> <%= @order.start_date %>
+        <strong> till </strong> <%= @order.start_date+7*@order.period %> 
+      </p>
+      <p>
+        <strong>To be shown <%= @order.frequency%> time(s) per hour. </strong>
+      </p>
+      <p>
+        <strong>Total Price:</strong>
+        <%= @order.total_price %> $
+      </p>
+      <p>
+        <strong>Status:</strong>
+        <%= @order.status %>
+      </p>
+    </div>
+  </div>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @order.start_date %>
-</p>
-<p>
-  <strong>Frequency:</strong>
-  <%= @order.frequency %>
-</p>
-<p>
-  <strong>Address:</strong>
-  <%= @order.address %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @order.phone %>
-</p>
-<p>
-  <strong>Order number:</strong>
-  <%= @order.id %>
-</p>
-
-<p>
-  <strong>Total Price($):</strong>
-  <%= @order.total_price %>
-</p>
-<p>
-  <strong>Status:</strong>
-  <%= @order.status %>
-</p>
-
-<% if (@order.status == "unpaid") %>
-<%= form_tag charges_path do %>
-  <article>
-    <%= hidden_field_tag(:stripeToken) %>
-    <%= hidden_field_tag(:amount) %>
-    <%= hidden_field_tag(:orderId) %>
-  </article>
-  <button id='paynow'>Pay now</button>
-<% end %>
-
+  <% if (@order.status == "unpaid") %>
+  <%= form_tag charges_path do %>
+    <article>
+      <%= hidden_field_tag(:stripeToken) %>
+      <%= hidden_field_tag(:amount) %>
+      <%= hidden_field_tag(:orderId) %>
+    </article>
+    <div class="text-center">
+      <button class= "btn btn-success" id='paynow'>Pay now</button> &nbsp;
+      <%= link_to "Request cash payment", charges_cash_path(:param1 => @order.id), class: "btn btn-danger"%>
+    </div>
+  <% end %>
+<div>
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <script>

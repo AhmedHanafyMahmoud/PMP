@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :charges, :only => [:create]
+  get 'charges/cash'
 
   get 'admin/edit_user'
   get 'admin/edit_order'

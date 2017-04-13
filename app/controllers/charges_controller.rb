@@ -1,5 +1,7 @@
 class ChargesController < ApplicationController
-	def new
+	def cash
+	    @order=Order.find(params[:param1])
+	    @order.cash = true	
 	end
 
 	def create

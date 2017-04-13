@@ -2,19 +2,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @post.name %>
+  <strong><%= @post.name %></strong>
 </p>
+<div class="row">
+  <div class="col-md-4">
+   <%= image_tag @post.image_url %>
+  </div>
+  <div class="col-md-8">
+	  <% unless @post.description == nil %>
+	  <strong>Description:</strong>
+	 	 <%= @post.description %>
+	  <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @post.image_url %>
-
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
 <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-link" %> |
 <%= link_to 'Back', posts_path, class: "btn btn-link" %>
 </div>
