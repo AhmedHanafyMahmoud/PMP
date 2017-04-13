@@ -48,18 +48,23 @@
   </div>
 
   <% if (@order.status == "unpaid") %>
-  <%= form_tag charges_path do %>
-    <article>
-      <%= hidden_field_tag(:stripeToken) %>
-      <%= hidden_field_tag(:amount) %>
-      <%= hidden_field_tag(:orderId) %>
-    </article>
-    <div class="text-center">
-      <button class= "btn btn-success" id='paynow'>Pay now</button> &nbsp;
-      <%= link_to "Request cash payment", charges_cash_path(:param1 => @order.id), class: "btn btn-danger"%>
-    </div>
+    <%= form_tag charges_path do %>
+      <article>
+        <%= hidden_field_tag(:stripeToken) %>
+        <%= hidden_field_tag(:amount) %>
+        <%= hidden_field_tag(:orderId) %>
+      </article>
+      <div class="text-center">
+        <button class= "btn btn-success" id='paynow'>Pay now</button> &nbsp;
+        <%= link_to "Request cash payment", charges_cash_path(:param1 => @order.id), class: "btn btn-danger"%>
+      </div>
+    <% end %>
   <% end %>
-<div>
+<%= link_to 'Edit', edit_order_path %> |
+<%= link_to 'Back', :back  %>
+</div>
+<%= render 'layouts/footer' %>
+ 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <script>
@@ -96,9 +101,5 @@ $(window).on('popstate', function() {
   handler.close();
 });
 </script>
-<% end %>
 
-<%= link_to 'Edit', edit_order_path %> |
-<%= link_to 'Back', :back  %>
-</div>
-<%= render 'layouts/footer' %>
+
