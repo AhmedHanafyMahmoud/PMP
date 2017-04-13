@@ -2,7 +2,9 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :check_admin, only: [:index]
+  # only admin can see all orders, may be better or admin pages put in a folder
   before_action :check_status, only: [:edit, :update]
+  # to insure that he cannot change dta for any order nless it is unpaid
   before_filter :reject_locked!
   before_action :check_hasPosts, only: [:new]
 

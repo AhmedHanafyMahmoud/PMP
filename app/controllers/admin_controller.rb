@@ -20,5 +20,5 @@ class AdminController < ApplicationController
       unless (current_user.is_admin?)
         redirect_to root_url, alert: "You have no admin righs!"
       end
-    end
+  end
 end
